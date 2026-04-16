@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marco Doria — Affiliate Marketing Manager @ Eneba</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888888;
+      --accent: #ff6b1a;
+      --accent-dim: rgba(255, 107, 26, 0.12);
+      --green: #22c55e;
+      --white: #ffffff;
+      --radius: 8px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 56px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-inner { width: 100%; }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 620px;
+      margin-bottom: 3rem;
+      line-height: 1.7;
+    }
+
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 0.9rem;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: var(--muted); color: var(--white); }
+
+    /* ── SECTIONS ── */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+      max-width: 560px;
+    }
+
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: var(--accent); }
+
+    .stat-value {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-value span { color: var(--accent); }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ── COVER LETTER ── */
+    .letter-body {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+    }
+
+    .letter-body p {
+      color: var(--text);
+      margin-bottom: 1.25rem;
+      line-height: 1.8;
+      font-size: 0.97rem;
+    }
+
+    .letter-body p:last-child { margin-bottom: 0; }
+
+    .letter-body strong { color: var(--white); font-weight: 600; }
+
+    .letter-highlight {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .letter-highlight p {
+      font-size: 1.05rem;
+      color: var(--white);
+      font-style: italic;
+    }
+
+    /* ── ENEBA ANALYSIS ── */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .analysis-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .analysis-card h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .analysis-card p {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 4px;
+      border: 1px solid rgba(255,107,26,0.25);
+    }
+
+    .tag.neutral {
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      border-color: var(--border);
+    }
+
+    /* ── 90 DAYS ── */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .day-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .day-card:hover::before { opacity: 1; }
+
+    .day-number {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .day-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .day-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .day-items li {
+      font-size: 0.83rem;
+      color: var(--muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .day-items li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.05em;
+    }
+
+    /* ── EXPERIENCE ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1px 1fr;
+      gap: 0 2rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: right;
+      padding-top: 0.2rem;
+    }
+
+    .timeline-line {
+      position: relative;
+      background: var(--border);
+    }
+
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 0.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .timeline-content { padding-top: 0; }
+
+    .timeline-role {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.15rem;
+    }
+
+    .timeline-company {
+      font-size: 0.83rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+
+    .timeline-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .timeline-metric {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.6rem;
+      padding: 0.25rem 0.6rem;
+      background: var(--accent-dim);
+      border: 1px solid rgba(255,107,26,0.2);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .skill-group h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-left {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .footer-left strong { color: var(--text); }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .ai-badge::before {
+      content: '⚡';
+      font-size: 0.7rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .stats-grid, .days-grid { grid-template-columns: 1fr; }
+      .analysis-grid, .skills-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 80px 1px 1fr; gap: 0 1rem; }
+      .nav-links { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">Marco Doria</span>
+    <ul class="nav-links">
+      <li><a href="#numbers">Numbers</a></li>
+      <li><a href="#letter">Cover Letter</a></li>
+      <li><a href="#eneba">Why Eneba</a></li>
+      <li><a href="#90days">90 Days</a></li>
+      <li><a href="#experience">Experience</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-label">Applying for — Affiliate Marketing Manager</div>
+      <h1>I've worked on<br><span>both sides</span> of the table.</h1>
+      <p class="hero-sub">
+        Most affiliate managers have worked <strong>with</strong> publishers.
+        I've worked <strong>as</strong> one — inside two of Italy's most-read
+        tech media properties. I know what makes a publisher say yes,
+        and what makes them quietly deprioritize a partner regardless of payout.
+      </p>
+      <div class="hero-cta">
+        <a href="#letter" class="btn-primary">Read the full case →</a>
+        <a href="https://www.linkedin.com/in/marcostefanodoria/" target="_blank" rel="noopener" class="btn-ghost">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NUMBERS -->
+  <section id="numbers">
+    <div class="section-label">By the numbers</div>
+    <h2 class="section-title">The operational reality.</h2>
+    <p class="section-sub">What the title "Affiliate Content Coordinator" does not capture.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card fade-in">
+        <div class="stat-value">10<span>+</span></div>
+        <div class="stat-label">People hired, onboarded and managed directly at Blazemedia</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-value">€40<span>k+</span></div>
+        <div class="stat-label">Monthly revenue generated by the team from promotional content alone (VPN, telecom, subscription)</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-value">4<span>yr</span></div>
+        <div class="stat-label">Continuous affiliate publishing experience across TechRadar Italia, Tom's Hardware and Blazemedia</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVER LETTER -->
+  <section id="letter">
+    <div class="section-label">Cover Letter</div>
+    <h2 class="section-title">The full case.</h2>
+    <p class="section-sub">Why the publisher-side perspective matters for Eneba specifically.</p>
+
+    <div class="letter-body fade-in">
+      <div class="letter-highlight">
+        <p>"Most affiliate managers have worked with publishers. I've worked as one."</p>
+      </div>
+
+      <p>For four years across TechRadar Italia and Tom's Hardware, I was on the side of the table that decides which programs get promoted, which deals get featured, and which partnerships get prioritized when editorial space is limited. I know what makes a publisher say yes, and what makes them quietly deprioritize a partner regardless of payout. That perspective is difficult to replicate from the advertiser side, and it is directly relevant to what Eneba needs to build.</p>
+
+      <p>I moved from Senior Editor to my current role at Blazemedia deliberately: I wanted to take the publisher-side understanding I had built and apply it operationally, from inside an affiliate content operation rather than from inside a newsroom. At Blazemedia, I lead a team of over ten people responsible for affiliate content across Amazon, eBay, and major tech retailers. My responsibilities include <strong>hiring and onboarding new team members, managing individual performance, and owning quality standards</strong> across the full output. The team generates over <strong>€40,000 in monthly revenue</strong> from promotional content alone, primarily across VPN, telecom, and subscription services. I work through <strong>Awin</strong> for partner tracking and link management, and I coordinate daily across editorial, commercial, and tech teams to connect content decisions to measurable revenue outcomes.</p>
+
+      <p>My title is Affiliate Content Coordinator, but the operational scope has been full team ownership, hiring accountability, and performance-driven decision-making since day one.</p>
+
+      <p>Before Blazemedia, as Senior Editor at TechRadar Italia and Tom's Hardware, I managed editorial partnerships with VPN providers, cloud services, and eLearning brands in one of the most competitive affiliate verticals in European tech media. I understand how publishers evaluate long-term relationships, what signals make them scale a partnership, and how trust gets built or lost in the first ninety days of a new deal.</p>
+
+      <p>My approach is data-driven by necessity. I track what converts, iterate on what does not, and make decisions quickly when the data is ambiguous. I have operated in fast-paced environments where the cost of waiting for certainty is higher than the cost of a wrong move that can be corrected.</p>
+
+      <p>I am fully remote-based and have worked in international environments throughout my career. My English is C1, operational, and has been my primary professional language for over a decade.</p>
+
+      <p><strong>I have a clear view of what I would build in this role and how I would start. I am ready to discuss it.</strong></p>
+    </div>
+  </section>
+
+  <!-- WHY ENEBA -->
+  <section id="eneba">
+    <div class="section-label">Market analysis</div>
+    <h2 class="section-title">Why this is the right problem.</h2>
+    <p class="section-sub">What I see when I look at Eneba's position in the affiliate market.</p>
+
+    <div class="analysis-grid fade-in">
+      <div class="analysis-card">
+        <h4>The competitive landscape</h4>
+        <p>G2A and Kinguin dominate by volume, but carry reputational weight that works against them with certain publisher segments — specifically the media and content publishers who drive the highest-intent gaming traffic.</p>
+        <div class="tag-list">
+          <span class="tag neutral">G2A</span>
+          <span class="tag neutral">Kinguin</span>
+          <span class="tag neutral">CDKeys</span>
+        </div>
+      </div>
+      <div class="analysis-card">
+        <h4>Eneba's differentiator</h4>
+        <p>Trust and safety is a real, underexploited edge in affiliate. The publishers most likely to prioritize Eneba are exactly the ones most sensitive to brand safety — tech media, gaming editorial, review sites.</p>
+        <div class="tag-list">
+          <span class="tag">Trust positioning</span>
+          <span class="tag">Publisher-first</span>
+        </div>
+      </div>
+      <div class="analysis-card">
+        <h4>The gap I fill</h4>
+        <p>Building that publisher trust requires someone who understands how editorial decisions get made — not just how to negotiate commission rates. That is the publisher-side fluency I bring.</p>
+        <div class="tag-list">
+          <span class="tag">Editorial fluency</span>
+          <span class="tag">Relationship-led</span>
+        </div>
+      </div>
+      <div class="analysis-card">
+        <h4>Growth signals I tracked</h4>
+        <p>€10M AI investment for mobile gaming recommendations, 100k+ products in catalogue, 80% user retention rate. This is a company scaling infrastructure — the affiliate channel needs to scale with it.</p>
+        <div class="tag-list">
+          <span class="tag">€10M AI funding</span>
+          <span class="tag">100k+ products</span>
+          <span class="tag">80% retention</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 90 DAYS -->
+  <section id="90days">
+    <div class="section-label">The plan</div>
+    <h2 class="section-title">First 90 days.</h2>
+    <p class="section-sub">Concrete, not theoretical. This is how I would start.</p>
+
+    <div class="days-grid">
+      <div class="day-card fade-in">
+        <div class="day-number">Days 1–30</div>
+        <div class="day-title">Map the landscape</div>
+        <ul class="day-items">
+          <li>Audit existing affiliate partnerships and current channel performance</li>
+          <li>Identify top-performing publisher segments by conversion quality</li>
+          <li>Map where Eneba is underpenetrated relative to market position</li>
+          <li>Understand internal tooling, reporting, and cross-team workflows</li>
+        </ul>
+      </div>
+      <div class="day-card fade-in">
+        <div class="day-number">Days 31–60</div>
+        <div class="day-title">Build the framework</div>
+        <ul class="day-items">
+          <li>Define a prioritization model for partnership development</li>
+          <li>Identify 10–15 high-value publishers not yet in the network</li>
+          <li>Establish the metrics that matter: not just clicks, but revenue quality</li>
+          <li>Begin structured outreach to editorial gaming and tech media</li>
+        </ul>
+      </div>
+      <div class="day-card fade-in">
+        <div class="day-number">Days 61–90</div>
+        <div class="day-title">Execute and iterate</div>
+        <ul class="day-items">
+          <li>Close first new publisher partnerships using trust-positioning angle</li>
+          <li>Document what works and what does not — build the playbook</li>
+          <li>Set team structure and hiring plan if headcount is available</li>
+          <li>Report first results with clear attribution to strategy decisions</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">The track record.</h2>
+    <p class="section-sub">Four years of affiliate work, eight years of publisher-side experience.</p>
+
+    <div class="timeline fade-in">
+      <div class="timeline-item">
+        <div class="timeline-date">2023 – now</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Affiliate Content Coordinator</div>
+          <div class="timeline-company">Blazemedia — Rome (Remote)</div>
+          <div class="timeline-desc">Team ownership (10+ people), hiring and performance management, deal selection across Amazon/eBay/major tech retailers, quality standards, cross-department liaison. Awin for partner tracking and link management.</div>
+          <div class="timeline-metric">€40,000+ monthly revenue from team output</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2019 – 2023</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Senior Editor</div>
+          <div class="timeline-company">TechRadar Italia + Tom's Hardware — 3Labs SRL, Milan</div>
+          <div class="timeline-desc">News writing and translation (EN to IT), buying guides, SEO strategy, editorial planning, affiliate partnerships with VPN providers, cloud services, and eLearning brands.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">2013 – 2021</div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="timeline-role">Freelance Translator and Proofreader</div>
+          <div class="timeline-company">EN to IT — IT, marketing, gaming, industrial</div>
+          <div class="timeline-desc">Clients: Dell, Microsoft, Apple, Samsung, NetApp, 888 Casino. Tools: SDL Trados, memoQ, Passolo. Contributed to the English edition of Hacklog vol. 1 (ethical hacking, Stefano Novelli).</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <div class="section-label" style="margin-bottom: 1rem;">Tools and skills</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h4>Affiliate and analytics</h4>
+          <div class="tag-list">
+            <span class="tag">Awin</span>
+            <span class="tag">Google Analytics</span>
+            <span class="tag">Google Data Studio</span>
+            <span class="tag">SEOZoom</span>
+            <span class="tag">Ubersuggest</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Content and CMS</h4>
+          <div class="tag-list">
+            <span class="tag">WordPress</span>
+            <span class="tag">Vanilla CMS</span>
+            <span class="tag">SEO strategy</span>
+            <span class="tag">Buying guides</span>
+            <span class="tag">Deal management</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Languages</h4>
+          <div class="tag-list">
+            <span class="tag">Italian — Native</span>
+            <span class="tag">English — C1 operational</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h4>Education</h4>
+          <div class="tag-list">
+            <span class="tag neutral">BA Communication and PR</span>
+            <span class="tag neutral">University of Catania</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <strong>Marco Stefano Doria</strong> — marcostefanodoria@gmail.com<br>
+      <span style="font-size:0.8rem;">Sicily, Italy · Remote-native · linkedin.com/in/marcostefanodoria</span>
+    </div>
+    <div class="footer-right">
+      <span class="ai-badge">Researched and built with Claude Code</span>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
